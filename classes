@@ -1,0 +1,82 @@
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
+public class ValidadorUsuarioTest {
+
+    private ValidadorUsuario validador;
+
+    @BeforeEach
+    void setUp() {
+        validador = new ValidadorUsuario();
+    }
+
+    TESTES NOME DE USUÁRIO
+
+    void testNomeUsuarioValido() {
+        assertTrue(validador.validarNomeUsuario("Vitoria123"));
+        assertTrue(validador.validarNomeUsuario("UsuarioTeste"));
+    }
+
+    void testNomeUsuarioMuitoCurto() {
+        assertFalse(validador.validarNomeUsuario("Vi"));
+        assertFalse(validador.validarNomeUsuario(""));
+    }
+
+    void testNomeUsuarioMuitoLongo() {
+        assertFalse(validador.validarNomeUsuario("VitoriaPereiraBorges124222034"));
+        assertFalse(validador.validarNomeUsuario("abcdefghijklmnopqrstu")); // 29 chars
+    }
+
+    void testNomeUsuarioNulo() {
+        assertFalse(validador.validarNomeUsuario(null));
+    }
+
+    TESTES EMAIL
+
+    void testEmailValido() {
+        assertTrue(validador.validarEmail("vitoriapereiraborges38@gmail.com"));
+        assertTrue(validador.validarEmail("user.name@dominio.com");
+    }
+
+    void testEmailSemArroba() {
+        assertFalse(validador.validarEmail("testeemail.com"));
+        assertFalse(validador.validarEmail("teste.email.com"));
+    }
+
+    void testEmailSemDominio() {
+        assertFalse(validador.validarEmail("teste@"));
+        assertFalse(validador.validarEmail("teste@dominio"));
+    }
+
+    void testEmailNulo() {
+        assertFalse(validador.validarEmail(null));
+    }
+
+    TESTES SENHA
+
+    void testSenhaValida() {
+        assertTrue(validador.validarSenha("Senha123"));
+        assertTrue(validador.validarSenha("abc12345"));
+    }
+
+    void testSenhaMuitoCurta() {
+        assertFalse(validador.validarSenha("Abc12"));
+        assertFalse(validador.validarSenha("1234567"));
+    }
+
+    void testSenhaSemNumeros() {
+        assertFalse(validador.validarSenha("SenhaSemNumero"));
+        assertFalse(validador.validarSenha("ApenasLetras"));
+    }
+
+    void testSenhaSemLetras() {
+        assertFalse(validador.validarSenha("12345678"));
+        assertFalse(validador.validarSenha("987654321"));
+    }
+
+    @Test
+    void testSenhaNula() {
+        assertFalse(validador.validarSenha(null));
+    }
+}
